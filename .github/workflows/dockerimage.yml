@@ -14,7 +14,7 @@ jobs:
       run: |
         wget https://dl.k8s.io/v1.16.0/kubernetes-server-linux-amd64.tar.gz
         wget https://github.com/fanux/kube/releases/download/v1.16.0-lvscare/kubeadm
-        tar zxvf kubernetes-server-linux-amd64.tar.g
+        tar zxvf kubernetes-server-linux-amd64.tar.gz
         chmod +x kubeadm
         cp kubeadm kube/bin/
         cd kube
