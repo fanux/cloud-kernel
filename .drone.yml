@@ -22,7 +22,7 @@ steps:
     - ID=$(jq -r ".InstanceIdSets.InstanceIdSet[0]" < InstanceId.json)
     - sleep 60 # wait for IP
     - aliyun ecs DescribeInstanceAttribute --InstanceId $ID >> info.json
-    - FIP=$(jq -r ".PublicIpAddress.IpAddress[0]" < info.json)
+    - export FIP=$(jq -r ".PublicIpAddress.IpAddress[0]" < info.json)
     - IP=$(jq -r ".VpcAttributes.PrivateIpAddress.IpAddress[0]" < info.json)
     - cat info.json && echo $ID && echo $FIP && echo $IP
     - sshpass -p Fanux#123 ssh root@$FIP 'cat "hello world" > hello'
