@@ -25,7 +25,7 @@ steps:
     - export FIP=$(jq -r ".PublicIpAddress.IpAddress[0]" < info.json)
     - IP=$(jq -r ".VpcAttributes.PrivateIpAddress.IpAddress[0]" < info.json)
     - cat info.json && echo $ID && echo $FIP && echo $IP
-    - sshpass -p Fanux#123 ssh root@${FIP} 'cat "hello world" > hello'
+    - sshpass -p Fanux#123 ssh root@$${FIP} 'cat "hello world" > hello'
 
       #- name: ssh-cmds
       #  image: appleboy/drone-ssh
