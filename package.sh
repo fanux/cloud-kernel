@@ -37,9 +37,8 @@ remotecmd "cd cloud-kernel && \
            sed s/k8s_version/$1/g -i conf/kubeadm.yaml && \
            cd shell && sh init.sh && sh master.sh && \
            wget https://github.com/fanux/sealos/releases/download/$2/sealos && chmod +x sealos && mv sealos ../bin/ && \
-           cd ../.. && sleep 60 && \
-           docker save -o images.tar `docker images|grep ago|awk '{print $1":"$2}'` && \
-           mv images.tar kube/images/ && \
+           cd ../.. && sleep 160 && docker images && \
+           sh save.sh && \
            tar zcvf kube$1.tar.gz kube && mv kube$1.tar.gz /tmp/"
 
 # echo "install sealos"
@@ -48,7 +47,7 @@ remotecmd "cd cloud-kernel && \
 #echo "test install"
 #sshcmd --passwd Fanux#123 --host $FIP --cmd "sealos init --master $IP --passwd Fanux#123 --pkg-url https://sealyun.oss-cn-beijing.aliyuncs.com/free/kube1.15.0.tar.gz --version v1.15.0" 
 
-echo "release package"
+echo "release package, need remote server passwd, WARN will pending"
 sshcmd --passwd Sealyun3 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"
 
 echo "release instance"
