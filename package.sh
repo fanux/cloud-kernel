@@ -18,16 +18,18 @@ sleep 100 # wait for sshd
 
 alias remotecmd="sshcmd --passwd Fanux#123 --host $FIP --cmd"
 
-echo "install docker and git"
-remotecmd 'yum install -y docker git && systemctl start docker' 
+echo "install git"
+remotecmd 'yum install -y git'
 
 echo "clone cloud kernel"
-remotecmd 'git clone https://github.com/fanux/cloud-kernel' 
+remotecmd 'git clone https://github.com/fanux/cloud-kernel'
 
 echo "install kubernetes bin"
 remotecmd "cd cloud-kernel && \
            wget https://dl.k8s.io/v$1/kubernetes-server-linux-amd64.tar.gz && \
            wget https://github.com/fanux/kube/releases/download/v$1-lvscare/kubeadm && \
+           wget https://download.docker.com/linux/static/stable/x86_64/docker-19.03.0.tgz && \
+           cp  docker-19.03.0.tgz kube/docker/docker.tgz && \
            tar zxvf kubernetes-server-linux-amd64.tar.gz && \
            chmod +x kubeadm && \
            cp kubeadm kube/bin/ && \
@@ -45,7 +47,7 @@ remotecmd "cd cloud-kernel && \
 # remotecmd "wget https://github.com/fanux/sealos/releases/download/$2/sealos && chmod +x sealos && mv sealos /usr/bin"
 
 #echo "test install"
-#sshcmd --passwd Fanux#123 --host $FIP --cmd "sealos init --master $IP --passwd Fanux#123 --pkg-url https://sealyun.oss-cn-beijing.aliyuncs.com/free/kube1.15.0.tar.gz --version v1.15.0" 
+#sshcmd --passwd Fanux#123 --host $FIP --cmd "sealos init --master $IP --passwd Fanux#123 --pkg-url https://sealyun.oss-cn-beijing.aliyuncs.com/free/kube1.15.0.tar.gz --version v1.15.0"
 
 echo "release package, need remote server passwd, WARN will pending"
 sshcmd --passwd Sealyun3 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"

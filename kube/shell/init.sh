@@ -1,3 +1,7 @@
+# Install docker
+chmod a+x docker.sh
+#./docker.sh  /var/docker/lib  127.0.0.1
+sh docker.sh
 # Open ipvs
 modprobe -- ip_vs
 modprobe -- ip_vs_rr
@@ -104,4 +108,3 @@ volumeStatsAggPeriod: 1m0s
 EOF
 
 systemctl enable kubelet
-systemctl enable docker
