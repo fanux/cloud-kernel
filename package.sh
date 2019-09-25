@@ -52,7 +52,8 @@ remotecmd "cd cloud-kernel && \
            sed s/k8s_version/$1/g -i conf/kubeadm.yaml && \
            cd shell && sh init.sh && sh master.sh && \
            docker pull fanux/lvscare && \
-           wget https://github.com/fanux/sealos/releases/download/$2/sealos && chmod +x sealos && mv sealos ../bin/ && \
+           wget https://github.com/fanux/sealos/releases/download/$2/sealos && chmod +x sealos && \
+           cp sealos /usr/bin && mv sealos ../bin/ && \
            cd ../.. && sleep 160 && docker images && \
            sh save.sh && \
            tar zcvf kube$1.tar.gz kube && mv kube$1.tar.gz /tmp/"
