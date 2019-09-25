@@ -1,0 +1,28 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+ 
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image
+      run: |
+        wget https://dl.k8s.io/v1.16.0/kubernetes-server-linux-amd64.tar.gz
+        wget https://github.com/fanux/kube/releases/download/v1.16.0-lvscare/kubeadm
+        tar zxvf kubernetes-server-linux-amd64.tar.gz
+        chmod +x kubeadm
+        cp kubeadm kube/bin/
+        cd kube
+        cp ../kubernetes/server/bin/kubectl bin/
+        cp ../kubernetes/server/bin/kubelet bin/
+        sed  "s/k8s_version/1.16.0/g" -i conf/kubeadm.yaml
+        cd shell && sh init.sh && sh master.sh
+        sleep 30 && docker images
+        cd ../images && docker save -i images.tar $(docker images |grep ago| awk '{print $1":"$2}')
+        cd ../.. && tar zcvf kube1.16.0.tar.gz kube
+      

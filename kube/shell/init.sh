@@ -12,14 +12,9 @@ EOF
 sysctl --system
 sysctl -w net.ipv4.ip_forward=1
 systemctl stop firewalld && systemctl disable firewalld
-swapoff -a
-setenforce 0
-docker load -i ../images/kube-apiserver.tar
-docker load -i ../images/kube-controller-manager.tar
-docker load -i ../images/kube-proxy.tar
-docker load -i ../images/kube-scheduler.tar
-docker load -i ../images/cloud-kernel-addon.tar
-
+swapoff -a || true
+setenforce 0 || true
+docker load -i ../images/images.tar || true
 
 cp ../bin/* /usr/bin
 # Cgroup driver
