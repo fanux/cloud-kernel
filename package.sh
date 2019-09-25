@@ -57,15 +57,12 @@ remotecmd "cd cloud-kernel && \
            sh save.sh && \
            tar zcvf kube$1.tar.gz kube && mv kube$1.tar.gz /tmp/"
 
-# echo "install sealos"
-# remotecmd "wget https://github.com/fanux/sealos/releases/download/$2/sealos && chmod +x sealos && mv sealos /usr/bin"
-
-#echo "test install"
-#sshcmd --passwd Fanux#123 --host $FIP --cmd "sealos init --master $IP --passwd Fanux#123 --pkg-url https://sealyun.oss-cn-beijing.aliyuncs.com/free/kube1.15.0.tar.gz --version v1.15.0"
+# run init test
+sh test.sh ${DRONE_TAG} $FIP
 
 echo "release package, need remote server passwd, WARN will pending"
 sshcmd --passwd $3 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"
 
 echo "release instance"
-sleep 100
+sleep 20
 aliyun ecs DeleteInstances --InstanceId.1 $ID --RegionId cn-hongkong --Force true
