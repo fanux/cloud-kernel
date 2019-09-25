@@ -2,20 +2,6 @@
 # clientip is where to run sealos server FIP
 # sh test.sh 1.15.4 clientip
 
-# getIP $ID return IP 
-getIP(){
-    aliyun ecs DescribeInstanceAttribute --InstanceId $1 > info.json
-    ip=$(jq -r ".VpcAttributes.PrivateIpAddress.IpAddress[0]" < info.json)
-    return $ip
-}
-
-# maybe don't need this
-getFIP(){
-    aliyun ecs DescribeInstanceAttribute --InstanceId $1 > info.json
-    fip=$(jq -r ".PublicIpAddress.IpAddress[0]" < info.json)
-    return $fip
-}
-
 echo "create 4 vms"
 aliyun ecs RunInstances --Amount 4 \
     --ImageId centos_7_04_64_20G_alibase_201701015.vhd \
@@ -39,17 +25,17 @@ ID3=$(jq -r ".InstanceIdSets.InstanceIdSet[3]" < InstanceId.json)
 echo "sleep 40s wait for IP and FIP"
 sleep 40 # wait for IP
 
-getIP $ID0
-master0=$?
+aliyun ecs DescribeInstanceAttribute --InstanceId $ID0 > info.json
+master0=$(jq -r ".VpcAttributes.PrivateIpAddress.IpAddress[0]" < info.json)
 
-getIP $ID1
-master1=$?
+aliyun ecs DescribeInstanceAttribute --InstanceId $ID1 > info.json
+master1=$(jq -r ".VpcAttributes.PrivateIpAddress.IpAddress[0]" < info.json)
 
-getIP $ID2
-master2=$?
+aliyun ecs DescribeInstanceAttribute --InstanceId $ID2 > info.json
+master2=$(jq -r ".VpcAttributes.PrivateIpAddress.IpAddress[0]" < info.json)
 
-getIP $ID3
-node=$?
+aliyun ecs DescribeInstanceAttribute --InstanceId $ID3 > info.json
+node=$(jq -r ".VpcAttributes.PrivateIpAddress.IpAddress[0]" < info.json)
 
 echo "all nodes IP: $master0 $master1 $master2 $node"
 
