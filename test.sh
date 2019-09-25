@@ -27,6 +27,7 @@ sleep 40 # wait for IP
 
 aliyun ecs DescribeInstanceAttribute --InstanceId $ID0 > info.json
 master0=$(jq -r ".VpcAttributes.PrivateIpAddress.IpAddress[0]" < info.json)
+master0FIP=$(jq -r ".PublicIpAddress.IpAddress[0]" < info.json)
 
 aliyun ecs DescribeInstanceAttribute --InstanceId $ID1 > info.json
 master1=$(jq -r ".VpcAttributes.PrivateIpAddress.IpAddress[0]" < info.json)
@@ -51,11 +52,11 @@ remotecmd "sealos init --master $master0 --master $master1 --master $master2 \
 
 echo "wait for everything ok"
 sleep 40
-sshcmd --passwd Fanux#123 --host $master0 --cmd "kubectl get node && kubectl get pod --all-namespaces"
+sshcmd --passwd Fanux#123 --host $master0FIP --cmd "kubectl get node && kubectl get pod --all-namespaces"
 
 echo "sshcmd sealos clean command"
 remotecmd "sealos clean --master $master0 --master $master1 --master $master2 \
-    --node $node --passwd Fanux#123 --version v$1 --pkg-url /tmp/kube$1.tar.gz"
+    --node $node --passwd Fanux#123"
 
 echo "release instance"
 sleep 20
