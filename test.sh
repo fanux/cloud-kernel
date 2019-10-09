@@ -38,7 +38,7 @@ master2=$(jq -r ".VpcAttributes.PrivateIpAddress.IpAddress[0]" < info.json)
 aliyun ecs DescribeInstanceAttribute --InstanceId $ID3 > info.json
 node=$(jq -r ".VpcAttributes.PrivateIpAddress.IpAddress[0]" < info.json)
 
-echo "all nodes IP: $master0 $master1 $master2 $node"
+echo "[CHECK] all nodes IP: $master0 $master1 $master2 $node"
 
 echo "wait for sshd start"
 sleep 100 # wait for sshd
@@ -50,11 +50,11 @@ echo "sshcmd sealos command"
 remotecmd "sealos init --master $master0 --master $master1 --master $master2 \
     --node $node --passwd Fanux#123 --version v$1 --pkg-url /tmp/kube$1.tar.gz"
 
-echo "wait for everything ok"
+echo "[CHECK] wait for everything ok"
 sleep 40
 sshcmd --passwd Fanux#123 --host $master0FIP --cmd "kubectl get node && kubectl get pod --all-namespaces"
 
-echo "sshcmd sealos clean command"
+echo "[CHECK] sshcmd sealos clean command"
 remotecmd "sealos clean --master $master0 --master $master1 --master $master2 \
     --node $node --passwd Fanux#123"
 
