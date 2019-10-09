@@ -55,8 +55,8 @@ sleep 40
 sshcmd --passwd Fanux#123 --host $master0FIP --cmd "kubectl get node && kubectl get pod --all-namespaces"
 
 echo "[CHECK] sshcmd sealos clean command"
-remotecmd "sealos clean --master $master0 --master $master1 --master $master2 \
-    --node $node --passwd Fanux#123"
+#remotecmd "sealos clean --master $master0 --master $master1 --master $master2 \
+#    --node $node --passwd Fanux#123"
 
 echo "release instance"
 sleep 20
