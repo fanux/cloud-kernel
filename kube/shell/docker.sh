@@ -15,7 +15,7 @@ mkdir -p $storage
 cat > /etc/docker/daemon.json  << eof
 {
   "registry-mirrors": [
-     "http://373a6594.m.daocloud.io"
+     "https://bxsfpjcb.mirror.aliyuncs.com"
   ],
   "insecure-registries":
         ["$harbor_ip"],
