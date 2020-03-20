@@ -1,9 +1,22 @@
 #!/bin/bash
 # package.sh [k8s version] [sealos version]
-# package.sh 1.16.0 v2.0.5
+# package.sh 1.16.0 v2.0.5 storepass
 
 echo "create hongkong vm"
-aliyun ecs RunInstances --Amount 1 --ImageId centos_7_04_64_20G_alibase_201701015.vhd --InstanceType ecs.c5.xlarge --Action RunInstances --InternetChargeType PayByTraffic --InternetMaxBandwidthIn 50 --InternetMaxBandwidthOut 50 --Password Fanux#123 --InstanceChargeType PostPaid --SpotStrategy SpotAsPriceGo --RegionId cn-hongkong  --SecurityGroupId sg-j6cg7qx8vufo7vopqwiy --VSwitchId vsw-j6crutzktn5vdivgeb6tv --ZoneId cn-hongkong-b > InstanceId.json
+aliyun ecs RunInstances --Amount 1 \
+    --ImageId centos_7_04_64_20G_alibase_201701015.vhd \
+    --InstanceType ecs.c5.xlarge \
+    --Action RunInstances \
+    --InternetChargeType PayByTraffic \
+    --InternetMaxBandwidthIn 50 \
+    --InternetMaxBandwidthOut 50 \
+    --KeyPairName release \
+    --InstanceChargeType PostPaid \
+    --SpotStrategy SpotAsPriceGo \
+    --RegionId cn-hongkong  \
+    --SecurityGroupId sg-j6cg7qx8vufo7vopqwiy \
+    --VSwitchId vsw-j6crutzktn5vdivgeb6tv \
+    --ZoneId cn-hongkong-b > InstanceId.json
 ID=$(jq -r ".InstanceIdSets.InstanceIdSet[0]" < InstanceId.json)
 
 echo "sleep 40s wait for IP and FIP"
@@ -16,7 +29,7 @@ cat info.json && echo $ID && echo $FIP && echo $IP
 echo "wait for sshd start"
 sleep 100 # wait for sshd
 
-alias remotecmd="sshcmd --passwd Fanux#123 --host $FIP --cmd"
+alias remotecmd="sshcmd --pk ./release.pem --host $FIP --cmd"
 
 echo "install git"
 remotecmd 'yum install -y git'
@@ -38,20 +51,19 @@ remotecmd "cd cloud-kernel && \
            cp ../kubernetes/server/bin/kubelet bin/ && \
            sed s/k8s_version/$1/g -i conf/kubeadm.yaml && \
            cd shell && sh init.sh && sh master.sh && \
-           wget https://github.com/fanux/sealos/releases/download/$2/sealos && chmod +x sealos && mv sealos ../bin/ && \
+           docker pull fanux/lvscare && \
+           wget https://github.com/fanux/sealos/releases/download/$2/sealos && chmod +x sealos && \
+           cp sealos /usr/bin && mv sealos ../bin/ && \
            cd ../.. && sleep 160 && docker images && \
            sh save.sh && \
            tar zcvf kube$1.tar.gz kube && mv kube$1.tar.gz /tmp/"
 
-# echo "install sealos"
-# remotecmd "wget https://github.com/fanux/sealos/releases/download/$2/sealos && chmod +x sealos && mv sealos /usr/bin"
-
-#echo "test install"
-#sshcmd --passwd Fanux#123 --host $FIP --cmd "sealos init --master $IP --passwd Fanux#123 --pkg-url https://sealyun.oss-cn-beijing.aliyuncs.com/free/kube1.15.0.tar.gz --version v1.15.0"
+# run init test
+sh test.sh ${DRONE_TAG} $FIP
 
 echo "release package, need remote server passwd, WARN will pending"
-sshcmd --passwd Sealyun3 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"
+sshcmd --passwd $3 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"
 
 echo "release instance"
-sleep 100
+sleep 20
 aliyun ecs DeleteInstances --InstanceId.1 $ID --RegionId cn-hongkong --Force true

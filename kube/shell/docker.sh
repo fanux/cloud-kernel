@@ -4,7 +4,7 @@ command_exists() {
 }
 if ! command_exists docker; then
    set -x
-   tar --strip-components=1 -xvzf ../docker/docker.tgz -C /usr/local/bin
+   tar --strip-components=1 -xvzf ../docker/docker.tgz -C /usr/bin
    cp ../conf/docker.service /usr/lib/systemd/system/docker.service
    systemctl enable  docker.service
    systemctl restart docker.service
@@ -15,7 +15,7 @@ mkdir -p $storage
 cat > /etc/docker/daemon.json  << eof
 {
   "registry-mirrors": [
-     "http://373a6594.m.daocloud.io"
+     "https://bxsfpjcb.mirror.aliyuncs.com"
   ],
   "insecure-registries":
         ["$harbor_ip"],
