@@ -54,7 +54,7 @@ remotecmd "cd cloud-kernel && \
            docker pull fanux/lvscare && \
            wget https://github.com/fanux/sealos/releases/download/$2/sealos && chmod +x sealos && \
            cp sealos /usr/bin && mv sealos ../bin/ && \
-           cd ../.. && sleep 160 && docker images && \
+           cd ../.. && sleep 360 && docker images && \
            sh save.sh && \
            tar zcvf kube$1.tar.gz kube && mv kube$1.tar.gz /tmp/"
 
