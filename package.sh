@@ -6,6 +6,7 @@ echo "create hongkong vm"
 aliyun ecs RunInstances --Amount 1 \
     --ImageId centos_7_04_64_20G_alibase_201701015.vhd \
     --InstanceType ecs.c5.xlarge \
+    --Password Fanux#123 \
     --Action RunInstances \
     --InternetChargeType PayByTraffic \
     --InternetMaxBandwidthIn 50 \
