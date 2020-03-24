@@ -13,7 +13,7 @@ get_distribution() {
 	echo "$lsb_dist"
 }
 set -x
-storage=${1:-/var/docker/lib}
+storage=${1:-/var/lib/docker}
 harbor_ip=${2:-127.0.0.1}
 mkdir -p $storage
 if ! command_exists docker; then
