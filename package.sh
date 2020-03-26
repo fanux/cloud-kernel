@@ -32,7 +32,7 @@ sleep 100 # wait for sshd
 alias remotecmd="sshcmd --pk ./release.pem --host $FIP --cmd"
 
 echo "install git"
-remotecmd 'yum install -y git'
+remotecmd 'yum install -y git conntrack'
 
 echo "clone cloud kernel"
 remotecmd 'git clone https://github.com/fanux/cloud-kernel'
@@ -54,6 +54,7 @@ remotecmd "cd cloud-kernel && \
            docker pull fanux/lvscare && \
            wget https://github.com/fanux/sealos/releases/download/$2/sealos && chmod +x sealos && \
            cp sealos /usr/bin && mv sealos ../bin/ && \
+           cp /usr/sbin/conntrack ../bin/ && \
            cd ../.. && sleep 360 && docker images && \
            sh save.sh && \
            tar zcvf kube$1.tar.gz kube && mv kube$1.tar.gz /tmp/"
