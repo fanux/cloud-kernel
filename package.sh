@@ -40,15 +40,13 @@ remotecmd 'git clone https://github.com/fanux/cloud-kernel'
 echo "install kubernetes bin"
 remotecmd "cd cloud-kernel && \
            wget https://dl.k8s.io/v$1/kubernetes-server-linux-amd64.tar.gz && \
-           wget https://github.com/fanux/kube/releases/download/v$1-lvscare/kubeadm && \
            wget https://download.docker.com/linux/static/stable/x86_64/docker-19.03.0.tgz && \
            cp  docker-19.03.0.tgz kube/docker/docker.tgz && \
            tar zxvf kubernetes-server-linux-amd64.tar.gz && \
-           chmod +x kubeadm && \
-           cp kubeadm kube/bin/ && \
            cd kube && \
            cp ../kubernetes/server/bin/kubectl bin/ && \
            cp ../kubernetes/server/bin/kubelet bin/ && \
+           cp ../kubernetes/server/bin/kubeadm bin/ && \
            sed s/k8s_version/$1/g -i conf/kubeadm.yaml && \
            cd shell && sh init.sh && sh master.sh && \
            docker pull fanux/lvscare && \
