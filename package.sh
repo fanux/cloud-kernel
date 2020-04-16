@@ -49,7 +49,7 @@ remotecmd "cd cloud-kernel && \
            cp ../kubernetes/server/bin/kubeadm bin/ && \
            sed s/k8s_version/$1/g -i conf/kubeadm.yaml && \
            cd shell && sh init.sh && sh master.sh && \
-           docker pull fanux/lvscare && \
+           docker pull fanux/lvscare:v1.0.0 && \
            wget https://github.com/fanux/sealos/releases/download/$2/sealos && chmod +x sealos && \
            cp sealos /usr/bin && mv sealos ../bin/ && \
            cp /usr/sbin/conntrack ../bin/ && \
