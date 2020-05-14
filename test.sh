@@ -16,7 +16,7 @@ aliyun ecs RunInstances --Amount 4 \
     --RegionId cn-hongkong  \
     --SecurityGroupId sg-2zea7wyzv7b5hwn3hh3u \
     --VSwitchId vsw-2zefo5lukm3k7do4i8di3 \
-    --ZoneId cn-hongkong-b > InstanceId.json
+    --ZoneId cn-hongkong-c > InstanceId.json
 ID0=$(jq -r ".InstanceIdSets.InstanceIdSet[0]" < InstanceId.json)
 ID1=$(jq -r ".InstanceIdSets.InstanceIdSet[1]" < InstanceId.json)
 ID2=$(jq -r ".InstanceIdSets.InstanceIdSet[2]" < InstanceId.json)
