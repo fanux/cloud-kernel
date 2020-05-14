@@ -14,8 +14,8 @@ aliyun ecs RunInstances --Amount 4 \
     --InstanceChargeType PostPaid \
     --SpotStrategy SpotAsPriceGo \
     --RegionId cn-hongkong  \
-    --SecurityGroupId sg-j6cg7qx8vufo7vopqwiy \
-    --VSwitchId vsw-j6crutzktn5vdivgeb6tv \
+    --SecurityGroupId sg-2zea7wyzv7b5hwn3hh3u \
+    --VSwitchId vsw-2zefo5lukm3k7do4i8di3 \
     --ZoneId cn-hongkong-b > InstanceId.json
 ID0=$(jq -r ".InstanceIdSets.InstanceIdSet[0]" < InstanceId.json)
 ID1=$(jq -r ".InstanceIdSets.InstanceIdSet[1]" < InstanceId.json)
