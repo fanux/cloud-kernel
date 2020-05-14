@@ -20,7 +20,7 @@ steps:
   commands:
     - mkdir ~/.aliyun
     - echo $CONFIG | base64 --decode >> ~/.aliyun/config.json
-    - sh package.sh ${DRONE_TAG} v3.3.5 $PASSWD
+    - sh package.sh ${DRONE_TAG} v3.0.1 $PASSWD
   when:
      event:
      - tag
