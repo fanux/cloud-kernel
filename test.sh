@@ -13,10 +13,10 @@ aliyun ecs RunInstances --Amount 4 \
     --Password Fanux#123 \
     --InstanceChargeType PostPaid \
     --SpotStrategy SpotAsPriceGo \
-    --RegionId cn-beijing \
-    --SecurityGroupId sg-2zea7wyzv7b5hwn3hh3u \
-    --VSwitchId vsw-2zefo5lukm3k7do4i8di3 \
-    --ZoneId cn-beijing-h > InstanceId.json
+    --RegionId cn-hongkong  \
+    --SecurityGroupId sg-j6cb45dolegxcb32b47w \
+    --VSwitchId vsw-j6cvaap9o5a7et8uumqyx \
+    --ZoneId cn-hongkong-c > InstanceId.json
 ID0=$(jq -r ".InstanceIdSets.InstanceIdSet[0]" < InstanceId.json)
 ID1=$(jq -r ".InstanceIdSets.InstanceIdSet[1]" < InstanceId.json)
 ID2=$(jq -r ".InstanceIdSets.InstanceIdSet[2]" < InstanceId.json)
