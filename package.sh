@@ -17,6 +17,7 @@ aliyun ecs RunInstances --Amount 1 \
     --SecurityGroupId sg-j6cb45dolegxcb32b47w \
     --VSwitchId vsw-j6cvaap9o5a7et8uumqyx \
     --ZoneId cn-hongkong-c > InstanceId.json
+cat InstanceId.json
 ID=$(jq -r ".InstanceIdSets.InstanceIdSet[0]" < InstanceId.json)
 
 echo "sleep 40s wait for IP and FIP"
