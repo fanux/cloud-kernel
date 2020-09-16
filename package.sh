@@ -1,6 +1,6 @@
 #!/bin/bash
-# package.sh [k8s version] [sealos version]
-# package.sh 1.16.0 v2.0.5 storepass
+# package.sh [k8s version] password
+# package.sh 1.16.0 storepass
 
 echo "create hongkong vm"
 aliyun ecs RunInstances --Amount 1 \
@@ -51,8 +51,6 @@ remotecmd "cd cloud-kernel && \
            sed s/k8s_version/$1/g -i conf/kubeadm.yaml && \
            cd shell && sh init.sh && sh master.sh && \
            docker pull fanux/lvscare && \
-           wget https://github.com/fanux/sealos/releases/download/$2/sealos && chmod +x sealos && \
-           cp sealos /usr/bin && mv sealos ../bin/ && \
            cp /usr/sbin/conntrack ../bin/ && \
            cd ../.. && sleep 360 && docker images && \
            sh save.sh && \
@@ -62,7 +60,7 @@ remotecmd "cd cloud-kernel && \
 sh test.sh ${DRONE_TAG} $FIP
 
 echo "release package, need remote server passwd, WARN will pending"
-sshcmd --passwd $3 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"
+sshcmd --passwd $2 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"
 
 echo "release instance"
 sleep 20
