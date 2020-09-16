@@ -17,5 +17,5 @@ git push --tags
 # 使用
 ```
 docker run --rm -v /Users/fanux/.aliyun:/root/.aliyun -it fanux/aliyun-cli sh
-# sh package.sh 1.15.4 v2.0.5 
+# sh package.sh 1.15.4 
 ```
