@@ -35,8 +35,7 @@ if ! command_exists docker; then
 	esac
   tar --strip-components=1 -xvzf ../docker/docker.tgz -C /usr/bin
   chmod a+x /usr/bin
-  systemctl enable  docker.service
-  systemctl restart docker.service
+  [ -d  /etc/docker/ ] || mkdir /etc/docker/  -p
 cat > /etc/docker/daemon.json  << eof
 {
   "registry-mirrors": [
@@ -54,6 +53,9 @@ cat > /etc/docker/daemon.json  << eof
   "data-root":"${storage}"
 }
 eof
+  systemctl enable  docker.service
+  systemctl restart docker.service
 fi
-systemctl restart docker.service
-docker version
+# 已经安装了docker并且运行了, 就不去重启.
+docker info || systemctl restart docker.service
+
