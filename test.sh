@@ -42,13 +42,16 @@ echo "[CHECK] all nodes IP: $master0 $master1 $master2 $node"
 
 echo "wait for sshd start"
 sleep 100 # wait for sshd
-
 # $2 is sealos clientip
 alias remotecmd="sshcmd --pk ./release.pem --host $2 --cmd"
 
 echo "sshcmd sealos command"
 SEALOS_URL=$(curl -LsSf https://api.github.com/repos/fanux/sealos/releases/latest | jq ".assets[0].browser_download_url")
+# remove "
+SEALOS_URL=$(echo $SEALOS_URL | sed 's/.\(.*\)/\1/' | sed 's/\(.*\)./\1/')
+
 remotecmd "wget -c $SEALOS_URL && chmod +x sealos && mv sealos /usr/bin "
+
 remotecmd "sealos init --master $master0 --master $master1 --master $master2 \
     --node $node --passwd Fanux#123 --version v$1 --pkg-url /tmp/kube$1.tar.gz"
 
