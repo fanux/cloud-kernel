@@ -42,7 +42,7 @@ echo "[CHECK] all nodes IP: $master0 $master1 $master2 $node"
 
 echo "wait for sshd start"
 sleep 100 # wait for sshd
-SEALOSTMPTURL=$(curl -LsSf https://api.github.com/repos/fanux/sealos/releases/latest | jq .assets[0].browser_download_url)
+SEALOSTMPTURL=$(curl -LsSf https://api.github.com/repos/fanux/sealos/releases/latest | jq . | grep browser_download_url | awk '{print $2}')
 # remove "
 SEALOSLATESTURL=$(echo $SEALOSTMPTURL | sed 's/.\(.*\)/\1/' | sed 's/\(.*\)./\1/')
 # $2 is sealos clientip
