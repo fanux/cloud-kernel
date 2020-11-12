@@ -47,7 +47,8 @@ sleep 100 # wait for sshd
 alias remotecmd="sshcmd --pk ./release.pem --host $2 --cmd"
 
 echo "sshcmd sealos command"
-remotecmd "wget -c https://sealyun.oss-cn-beijing.aliyuncs.com/latest/sealos && chmod +x sealos && mv sealos /usr/bin "
+SEALOS_URL=$(curl -LsSf https://api.github.com/repos/fanux/sealos/releases/latest | jq ".assets[0].browser_download_url")
+remotecmd "wget -c $SEALOS_URL && chmod +x sealos && mv sealos /usr/bin "
 remotecmd "sealos init --master $master0 --master $master1 --master $master2 \
     --node $node --passwd Fanux#123 --version v$1 --pkg-url /tmp/kube$1.tar.gz"
 
