@@ -66,7 +66,7 @@ remotecmd "cd /tmp/ && wget http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil6
            md5=$(md5sum kube$1.tar.gz | awk  '{print $1}') && \
            echo $md5 && ossutil64 -c oss-config cp kube$1.tar.gz oss://sealyun/$md5-$1/kube$1.tar.gz && \
            echo oss://sealyun/$md5-$1/kube$1.tar.gz && wget https://github.com/cuisongliu/sshcmd/releases/download/v1.5.2/sshcmd && \
-           chmod a+x sshcmd && sshcmd --passwd $2 --host store.lameleg.com --cmd 'sh release-k8s-new.sh $1 $md5'"
+           chmod a+x sshcmd && ./sshcmd --passwd $2 --host store.lameleg.com --cmd 'sh release-k8s-new.sh $1 $md5'"
 
 
 #sshcmd --passwd $2 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"
