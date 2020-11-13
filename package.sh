@@ -49,10 +49,11 @@ remotecmd "cd cloud-kernel && \
            cp ../kubernetes/server/bin/kubelet bin/ && \
            cp ../kubernetes/server/bin/kubeadm bin/ && \
            sed s/k8s_version/$1/g -i conf/kubeadm.yaml && \
+           rm -rf /etc/docker/daemon.json && systemctl restart docker && \
            cd shell && sh init.sh && sh master.sh && \
            docker pull fanux/lvscare && \
            cp /usr/sbin/conntrack ../bin/ && \
-           cd ../.. && sleep 360 && docker images && \
+           cd ../.. && docker images && \
            sh save.sh && \
            tar zcvf kube$1.tar.gz kube && mv kube$1.tar.gz /tmp/"
 
