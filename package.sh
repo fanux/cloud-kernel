@@ -1,6 +1,7 @@
 #!/bin/bash
 # package.sh [k8s version] password
 # package.sh 1.16.0 storepass
+wget https://github.com/cuisongliu/sshcmd/releases/download/v1.5.2/sshcmd && chmod a+x sshcmd && mv sshcmd /usr/bin/sshcmd
 
 echo "create hongkong vm"
 aliyun ecs RunInstances --Amount 1 \
