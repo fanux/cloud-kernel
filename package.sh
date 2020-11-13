@@ -42,7 +42,7 @@ echo "install kubernetes bin"
 remotecmd "cd cloud-kernel && \
            wget https://dl.k8s.io/v$1/kubernetes-server-linux-amd64.tar.gz && \
            wget http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64  && chmod 755 ossutil64 && \
-           mv ossutil64 /usr/sbin/ossutil64 \
+           mv ossutil64 /usr/sbin/ossutil64 && \
            wget https://download.docker.com/linux/static/stable/x86_64/docker-19.03.12.tgz && \
            cp  docker-19.03.12.tgz kube/docker/docker.tgz && \
            tar zxvf kubernetes-server-linux-amd64.tar.gz && \
