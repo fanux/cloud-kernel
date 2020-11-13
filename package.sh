@@ -49,8 +49,9 @@ remotecmd "cd cloud-kernel && \
            cp ../kubernetes/server/bin/kubelet bin/ && \
            cp ../kubernetes/server/bin/kubeadm bin/ && \
            sed s/k8s_version/$1/g -i conf/kubeadm.yaml && \
+           cd shell && chmod a+x docker.sh && sh docker.sh && \
            rm -rf /etc/docker/daemon.json && systemctl restart docker && \
-           cd shell && sh init.sh && sh master.sh && \
+           sh init.sh && sh master.sh && \
            docker pull fanux/lvscare && \
            cp /usr/sbin/conntrack ../bin/ && \
            cd ../.. && docker images && \
