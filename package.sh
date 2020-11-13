@@ -63,21 +63,12 @@ sh test.sh ${DRONE_TAG} $FIP
 
 
 echo "release package, need remote server passwd, WARN will pending"
-remotecmd "ls /tmp/ && ls /root"
 remotecmd "cd /tmp/ && wget http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64  && chmod 755 ossutil64 && \
            mv ossutil64 /usr/sbin/ossutil64 && \
            ossutil64 config -e oss-accelerate.aliyuncs.com -i ${OSS_ID} -k ${OSS_KEY}  -L CH -c oss-config && \
            wget https://github.com/cuisongliu/sshcmd/releases/download/v1.5.2/sshcmd && chmod a+x sshcmd && \
            mv sshcmd /usr/sbin/sshcmd"
- remotecmd "cd /root/cloud-kernel/ && sh oss.sh $1"
-#remotecmd "cd /tmp/ && wget http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64  && chmod 755 ossutil64 && \
-#           mv ossutil64 /usr/sbin/ossutil64 && \
-#           ossutil64 config -e oss-accelerate.aliyuncs.com -i ${OSS_ID} -k ${OSS_KEY}  -L CH -c oss-config && \
-#           md5=$(md5sum /tmp/kube$1.tar.gz | awk  '{print \$1}') && \
-#           echo $md5 && ossutil64 -c oss-config cp /tmp/kube$1.tar.gz oss://sealyun/$md5-$1/kube$1.tar.gz && \
-#           echo oss://sealyun/$md5-$1/kube$1.tar.gz && wget https://github.com/cuisongliu/sshcmd/releases/download/v1.5.2/sshcmd && \
-#           chmod a+x sshcmd && ./sshcmd --passwd $2 --host store.lameleg.com --cmd 'sh release-k8s-new.sh $1 $md5'"
-
+remotecmd "cd /root/cloud-kernel/ && sh oss.sh $1 $2"
 
 #sshcmd --passwd $2 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"
 
