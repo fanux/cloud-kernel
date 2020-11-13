@@ -17,6 +17,10 @@ steps:
       from_secret: aliyun-cli-config
     PASSWD:
       from_secret: storepass
+    OSS_ID:
+      from_secret: oss-id
+    OSS_KEY:
+      from_secret: oss-key    
   commands:
     - mkdir ~/.aliyun
     - echo $CONFIG | base64 --decode >> ~/.aliyun/config.json
