@@ -41,6 +41,8 @@ remotecmd 'git clone https://github.com/fanux/cloud-kernel'
 echo "install kubernetes bin"
 remotecmd "cd cloud-kernel && \
            wget https://dl.k8s.io/v$1/kubernetes-server-linux-amd64.tar.gz && \
+           wget http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64  && chmod 755 ossutil64 && \
+           mv ossutil64 /usr/sbin/ossutil64 \
            wget https://download.docker.com/linux/static/stable/x86_64/docker-19.03.12.tgz && \
            cp  docker-19.03.12.tgz kube/docker/docker.tgz && \
            tar zxvf kubernetes-server-linux-amd64.tar.gz && \
@@ -58,7 +60,7 @@ remotecmd "cd cloud-kernel && \
 
 # run init test
 sh test.sh ${DRONE_TAG} $FIP
-
+ 
 echo "release package, need remote server passwd, WARN will pending"
 sshcmd --passwd $2 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"
 
