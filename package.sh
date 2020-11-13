@@ -55,7 +55,7 @@ remotecmd "cd cloud-kernel && \
            sh init.sh && sh master.sh && \
            docker pull fanux/lvscare && \
            cp /usr/sbin/conntrack ../bin/ && \
-           cd ../.. &&  sleep 360 && docker images && \
+           cd ../.. &&  sleep 180 && docker images && \
            sh save.sh && \
            tar zcvf kube$1.tar.gz kube && mv kube$1.tar.gz /tmp/"
 
