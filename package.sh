@@ -1,7 +1,6 @@
 #!/bin/bash
 # package.sh [k8s version] password
 # package.sh 1.16.0 storepass
-wget https://github.com/cuisongliu/sshcmd/releases/download/v1.5.2/sshcmd && chmod a+x sshcmd && mv sshcmd /usr/bin/sshcmd
 
 echo "create hongkong vm"
 aliyun ecs RunInstances --Amount 1 \
@@ -71,7 +70,7 @@ remotecmd "cd /tmp/ && wget http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil6
            mv sshcmd /usr/sbin/sshcmd && \
            wget https://sealyun-market.oss-accelerate.aliyuncs.com/marketctl/latest/marketctl && chmod a+x marketctl && \
            mv marketctl /usr/sbin/marketctl"
-remotecmd "cd /root/cloud-kernel/ && sh oss.sh $1 $2 ${MARKET_TOKEN}"
+remotecmd "cd /root/cloud-kernel/ && sh oss.sh $1 $2 ${MARKET_TOKEN} ${DING_TOKEN}"
 
 #sshcmd --passwd $2 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"
 

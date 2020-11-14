@@ -23,6 +23,8 @@ steps:
       from_secret: oss-key
     MARKET_TOKEN:
       from_secret: market-token
+    DING_TOKEN:
+      from_secret: dingding-token
   commands:
     - mkdir ~/.aliyun
     - echo $CONFIG | base64 --decode >> ~/.aliyun/config.json
