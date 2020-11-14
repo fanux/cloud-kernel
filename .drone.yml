@@ -21,15 +21,15 @@ steps:
       from_secret: oss-id
     OSS_KEY:
       from_secret: oss-key
-    ak:
-      from_secret: ak
-    sk:
-      from_secret: sk
+#    ak:
+#      from_secret: ak
+#    sk:
+#      from_secret: sk
   commands:
     - mkdir ~/.aliyun
     - echo $CONFIG | base64 --decode >> ~/.aliyun/config.json
     - sh package.sh ${DRONE_TAG} $PASSWD
-    - sh huawei/package.sh ${DRONE_TAG} $PASSWD
+#    - sh huawei/package.sh ${DRONE_TAG} $PASSWD
   when:
      event:
      - tag
