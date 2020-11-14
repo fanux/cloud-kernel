@@ -20,7 +20,9 @@ steps:
     OSS_ID:
       from_secret: oss-id
     OSS_KEY:
-      from_secret: oss-key    
+      from_secret: oss-key
+    MARKET_TOKEN:
+      from_secret: market-token
   commands:
     - mkdir ~/.aliyun
     - echo $CONFIG | base64 --decode >> ~/.aliyun/config.json
