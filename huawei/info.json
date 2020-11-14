@@ -1,0 +1,366 @@
+[
+    {
+        "status": "ACTIVE",
+        "updated": "2020-11-14T16:45:48Z",
+        "hostId": "6f0dd50d0a4bc2561748b857276360ea8858c6a2310b2cbd6390edea",
+        "OS-EXT-SRV-ATTR:host": "6f0dd50d0a4bc2561748b857276360ea8858c6a2310b2cbd6390edea",
+        "addresses": {
+            "a55545d8-a4cb-436d-a8ec-45c66aff725c": [
+                {
+                    "version": "4",
+                    "addr": "192.168.0.220",
+                    "OS-EXT-IPS:type": "fixed",
+                    "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:14:11:ea",
+                    "OS-EXT-IPS:port_id": "19407bf2-d860-4f6d-ac92-6c0321fdcf6b"
+                }
+            ]
+        },
+        "key_name": "louis",
+        "image": {
+            "id": "456416e6-1270-46a4-975e-3558ac03d4cd"
+        },
+        "OS-EXT-STS:task_state": "",
+        "OS-EXT-STS:vm_state": "active",
+        "OS-EXT-SRV-ATTR:instance_name": "instance-00259d95",
+        "OS-EXT-SRV-ATTR:hypervisor_hostname": "eaa592277a62cff61eb126ab4875fbc6fe94ee4562a8e0245aad4064",
+        "flavor": {
+            "id": "kc1.large.2",
+            "name": "kc1.large.2",
+            "disk": "0",
+            "vcpus": "2",
+            "ram": "4096"
+        },
+        "id": "5f2ac8e8-6979-4f5e-a71a-c5abd7667118",
+        "security_groups": [
+            {
+                "name": "default",
+                "id": "40ecbc76-a5ba-4a3f-8219-5f133f3b71ab"
+            }
+        ],
+        "OS-EXT-AZ:availability_zone": "ap-southeast-3a",
+        "user_id": "06b2432d2800254d1f82c014e811644e",
+        "name": "sealos",
+        "created": "2020-11-14T16:45:12Z",
+        "tenant_id": "06b275f705800f262f3bc014ffcdbde1",
+        "OS-DCF:diskConfig": "MANUAL",
+        "accessIPv4": "",
+        "accessIPv6": "",
+        "progress": 0,
+        "OS-EXT-STS:power_state": 1,
+        "config_drive": "",
+        "metadata": {
+            "charging_mode": "0",
+            "image_name": "CentOS 7.6 64bit with ARM",
+            "metering.image_id": "456416e6-1270-46a4-975e-3558ac03d4cd",
+            "metering.imagetype": "gold",
+            "metering.resourcespeccode": "kc1.large.2.linux",
+            "metering.resourcetype": "1",
+            "os_bit": "64",
+            "os_type": "Linux",
+            "vpc_id": "a55545d8-a4cb-436d-a8ec-45c66aff725c"
+        },
+        "OS-SRV-USG:launched_at": "2020-11-14T16:45:24.000000",
+        "OS-SRV-USG:terminated_at": "",
+        "os-extended-volumes:volumes_attached": [
+            {
+                "id": "f1f67fdf-7bab-4e66-949a-fc9d4644c5ec",
+                "delete_on_termination": "false",
+                "bootIndex": "0",
+                "device": "/dev/vda"
+            }
+        ],
+        "description": "",
+        "host_status": "UP",
+        "OS-EXT-SRV-ATTR:hostname": "sealos",
+        "OS-EXT-SRV-ATTR:reservation_id": "r-iy4ky24b",
+        "OS-EXT-SRV-ATTR:launch_index": 0,
+        "OS-EXT-SRV-ATTR:kernel_id": "",
+        "OS-EXT-SRV-ATTR:ramdisk_id": "",
+        "OS-EXT-SRV-ATTR:root_device_name": "/dev/vda",
+        "locked": false,
+        "tags": [
+            "test=sealos"
+        ],
+        "os:scheduler_hints": {},
+        "enterprise_project_id": "0",
+        "sys_tags": [
+            {
+                "key": "_sys_enterprise_project_id",
+                "value": "0"
+            }
+        ]
+    },
+    {
+        "status": "ACTIVE",
+        "updated": "2020-11-14T16:45:47Z",
+        "hostId": "6f0dd50d0a4bc2561748b857276360ea8858c6a2310b2cbd6390edea",
+        "OS-EXT-SRV-ATTR:host": "6f0dd50d0a4bc2561748b857276360ea8858c6a2310b2cbd6390edea",
+        "addresses": {
+            "a55545d8-a4cb-436d-a8ec-45c66aff725c": [
+                {
+                    "version": "4",
+                    "addr": "192.168.0.163",
+                    "OS-EXT-IPS:type": "fixed",
+                    "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:38:4f:ac",
+                    "OS-EXT-IPS:port_id": "c9549530-bb6e-42de-90b4-0c39a7a4bb22"
+                }
+            ]
+        },
+        "key_name": "louis",
+        "image": {
+            "id": "456416e6-1270-46a4-975e-3558ac03d4cd"
+        },
+        "OS-EXT-STS:task_state": "",
+        "OS-EXT-STS:vm_state": "active",
+        "OS-EXT-SRV-ATTR:instance_name": "instance-00259d94",
+        "OS-EXT-SRV-ATTR:hypervisor_hostname": "eaa592277a62cff61eb126ab4875fbc6fe94ee4562a8e0245aad4064",
+        "flavor": {
+            "id": "kc1.large.2",
+            "name": "kc1.large.2",
+            "disk": "0",
+            "vcpus": "2",
+            "ram": "4096"
+        },
+        "id": "1044224b-1d91-4b12-a034-71346c68c677",
+        "security_groups": [
+            {
+                "name": "default",
+                "id": "40ecbc76-a5ba-4a3f-8219-5f133f3b71ab"
+            }
+        ],
+        "OS-EXT-AZ:availability_zone": "ap-southeast-3a",
+        "user_id": "06b2432d2800254d1f82c014e811644e",
+        "name": "sealos",
+        "created": "2020-11-14T16:45:06Z",
+        "tenant_id": "06b275f705800f262f3bc014ffcdbde1",
+        "OS-DCF:diskConfig": "MANUAL",
+        "accessIPv4": "",
+        "accessIPv6": "",
+        "progress": 0,
+        "OS-EXT-STS:power_state": 1,
+        "config_drive": "",
+        "metadata": {
+            "charging_mode": "0",
+            "image_name": "CentOS 7.6 64bit with ARM",
+            "metering.image_id": "456416e6-1270-46a4-975e-3558ac03d4cd",
+            "metering.imagetype": "gold",
+            "metering.resourcespeccode": "kc1.large.2.linux",
+            "metering.resourcetype": "1",
+            "os_bit": "64",
+            "os_type": "Linux",
+            "vpc_id": "a55545d8-a4cb-436d-a8ec-45c66aff725c"
+        },
+        "OS-SRV-USG:launched_at": "2020-11-14T16:45:19.000000",
+        "OS-SRV-USG:terminated_at": "",
+        "os-extended-volumes:volumes_attached": [
+            {
+                "id": "9ddc03ad-5887-4621-8977-92c82822a87e",
+                "delete_on_termination": "false",
+                "bootIndex": "0",
+                "device": "/dev/vda"
+            }
+        ],
+        "description": "",
+        "host_status": "UP",
+        "OS-EXT-SRV-ATTR:hostname": "sealos",
+        "OS-EXT-SRV-ATTR:reservation_id": "r-39iphhd0",
+        "OS-EXT-SRV-ATTR:launch_index": 0,
+        "OS-EXT-SRV-ATTR:kernel_id": "",
+        "OS-EXT-SRV-ATTR:ramdisk_id": "",
+        "OS-EXT-SRV-ATTR:root_device_name": "/dev/vda",
+        "locked": false,
+        "tags": [
+            "test=sealos"
+        ],
+        "os:scheduler_hints": {},
+        "enterprise_project_id": "0",
+        "sys_tags": [
+            {
+                "key": "_sys_enterprise_project_id",
+                "value": "0"
+            }
+        ]
+    },
+    {
+        "status": "ACTIVE",
+        "updated": "2020-11-14T16:45:48Z",
+        "hostId": "6f0dd50d0a4bc2561748b857276360ea8858c6a2310b2cbd6390edea",
+        "OS-EXT-SRV-ATTR:host": "6f0dd50d0a4bc2561748b857276360ea8858c6a2310b2cbd6390edea",
+        "addresses": {
+            "a55545d8-a4cb-436d-a8ec-45c66aff725c": [
+                {
+                    "version": "4",
+                    "addr": "192.168.0.31",
+                    "OS-EXT-IPS:type": "fixed",
+                    "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:76:71:22",
+                    "OS-EXT-IPS:port_id": "8a611958-d757-4e4b-86b6-f7d7c268eb44"
+                }
+            ]
+        },
+        "key_name": "louis",
+        "image": {
+            "id": "456416e6-1270-46a4-975e-3558ac03d4cd"
+        },
+        "OS-EXT-STS:task_state": "",
+        "OS-EXT-STS:vm_state": "active",
+        "OS-EXT-SRV-ATTR:instance_name": "instance-00259d93",
+        "OS-EXT-SRV-ATTR:hypervisor_hostname": "eaa592277a62cff61eb126ab4875fbc6fe94ee4562a8e0245aad4064",
+        "flavor": {
+            "id": "kc1.large.2",
+            "name": "kc1.large.2",
+            "disk": "0",
+            "vcpus": "2",
+            "ram": "4096"
+        },
+        "id": "6ad6ff29-519b-4fa0-a5d8-f20b9f562719",
+        "security_groups": [
+            {
+                "name": "default",
+                "id": "40ecbc76-a5ba-4a3f-8219-5f133f3b71ab"
+            }
+        ],
+        "OS-EXT-AZ:availability_zone": "ap-southeast-3a",
+        "user_id": "06b2432d2800254d1f82c014e811644e",
+        "name": "sealos",
+        "created": "2020-11-14T16:45:06Z",
+        "tenant_id": "06b275f705800f262f3bc014ffcdbde1",
+        "OS-DCF:diskConfig": "MANUAL",
+        "accessIPv4": "",
+        "accessIPv6": "",
+        "progress": 0,
+        "OS-EXT-STS:power_state": 1,
+        "config_drive": "",
+        "metadata": {
+            "charging_mode": "0",
+            "image_name": "CentOS 7.6 64bit with ARM",
+            "metering.image_id": "456416e6-1270-46a4-975e-3558ac03d4cd",
+            "metering.imagetype": "gold",
+            "metering.resourcespeccode": "kc1.large.2.linux",
+            "metering.resourcetype": "1",
+            "os_bit": "64",
+            "os_type": "Linux",
+            "vpc_id": "a55545d8-a4cb-436d-a8ec-45c66aff725c"
+        },
+        "OS-SRV-USG:launched_at": "2020-11-14T16:45:20.000000",
+        "OS-SRV-USG:terminated_at": "",
+        "os-extended-volumes:volumes_attached": [
+            {
+                "id": "2a36deed-a092-4056-93a0-8fef7b86ca35",
+                "delete_on_termination": "false",
+                "bootIndex": "0",
+                "device": "/dev/vda"
+            }
+        ],
+        "description": "",
+        "host_status": "UP",
+        "OS-EXT-SRV-ATTR:hostname": "sealos",
+        "OS-EXT-SRV-ATTR:reservation_id": "r-c8hwjko7",
+        "OS-EXT-SRV-ATTR:launch_index": 0,
+        "OS-EXT-SRV-ATTR:kernel_id": "",
+        "OS-EXT-SRV-ATTR:ramdisk_id": "",
+        "OS-EXT-SRV-ATTR:root_device_name": "/dev/vda",
+        "locked": false,
+        "tags": [
+            "test=sealos"
+        ],
+        "os:scheduler_hints": {},
+        "enterprise_project_id": "0",
+        "sys_tags": [
+            {
+                "key": "_sys_enterprise_project_id",
+                "value": "0"
+            }
+        ]
+    },
+    {
+        "status": "ACTIVE",
+        "updated": "2020-11-14T16:45:47Z",
+        "hostId": "6f0dd50d0a4bc2561748b857276360ea8858c6a2310b2cbd6390edea",
+        "OS-EXT-SRV-ATTR:host": "6f0dd50d0a4bc2561748b857276360ea8858c6a2310b2cbd6390edea",
+        "addresses": {
+            "a55545d8-a4cb-436d-a8ec-45c66aff725c": [
+                {
+                    "version": "4",
+                    "addr": "192.168.0.86",
+                    "OS-EXT-IPS:type": "fixed",
+                    "OS-EXT-IPS-MAC:mac_addr": "fa:16:3e:11:c4:26",
+                    "OS-EXT-IPS:port_id": "903118d7-f49d-4b60-b755-302232677bb3"
+                }
+            ]
+        },
+        "key_name": "louis",
+        "image": {
+            "id": "456416e6-1270-46a4-975e-3558ac03d4cd"
+        },
+        "OS-EXT-STS:task_state": "",
+        "OS-EXT-STS:vm_state": "active",
+        "OS-EXT-SRV-ATTR:instance_name": "instance-00259d92",
+        "OS-EXT-SRV-ATTR:hypervisor_hostname": "eaa592277a62cff61eb126ab4875fbc6fe94ee4562a8e0245aad4064",
+        "flavor": {
+            "id": "kc1.large.2",
+            "name": "kc1.large.2",
+            "disk": "0",
+            "vcpus": "2",
+            "ram": "4096"
+        },
+        "id": "2d388d5e-5736-4b57-8237-e91e1a33102b",
+        "security_groups": [
+            {
+                "name": "default",
+                "id": "40ecbc76-a5ba-4a3f-8219-5f133f3b71ab"
+            }
+        ],
+        "OS-EXT-AZ:availability_zone": "ap-southeast-3a",
+        "user_id": "06b2432d2800254d1f82c014e811644e",
+        "name": "sealos",
+        "created": "2020-11-14T16:45:06Z",
+        "tenant_id": "06b275f705800f262f3bc014ffcdbde1",
+        "OS-DCF:diskConfig": "MANUAL",
+        "accessIPv4": "",
+        "accessIPv6": "",
+        "progress": 0,
+        "OS-EXT-STS:power_state": 1,
+        "config_drive": "",
+        "metadata": {
+            "charging_mode": "0",
+            "image_name": "CentOS 7.6 64bit with ARM",
+            "metering.image_id": "456416e6-1270-46a4-975e-3558ac03d4cd",
+            "metering.imagetype": "gold",
+            "metering.resourcespeccode": "kc1.large.2.linux",
+            "metering.resourcetype": "1",
+            "os_bit": "64",
+            "os_type": "Linux",
+            "vpc_id": "a55545d8-a4cb-436d-a8ec-45c66aff725c"
+        },
+        "OS-SRV-USG:launched_at": "2020-11-14T16:45:19.000000",
+        "OS-SRV-USG:terminated_at": "",
+        "os-extended-volumes:volumes_attached": [
+            {
+                "id": "20fec87f-4757-4212-9121-9d5bc98a357f",
+                "delete_on_termination": "false",
+                "bootIndex": "0",
+                "device": "/dev/vda"
+            }
+        ],
+        "description": "",
+        "host_status": "UP",
+        "OS-EXT-SRV-ATTR:hostname": "sealos",
+        "OS-EXT-SRV-ATTR:reservation_id": "r-vqvxqfmq",
+        "OS-EXT-SRV-ATTR:launch_index": 0,
+        "OS-EXT-SRV-ATTR:kernel_id": "",
+        "OS-EXT-SRV-ATTR:ramdisk_id": "",
+        "OS-EXT-SRV-ATTR:root_device_name": "/dev/vda",
+        "locked": false,
+        "tags": [
+            "test=sealos"
+        ],
+        "os:scheduler_hints": {},
+        "enterprise_project_id": "0",
+        "sys_tags": [
+            {
+                "key": "_sys_enterprise_project_id",
+                "value": "0"
+            }
+        ]
+    }
+]
