@@ -63,13 +63,11 @@ sh test.sh ${DRONE_TAG} $FIP
 
 
 echo "release package, need remote server passwd, WARN will pending"
-remotecmd "cd /tmp/ && wget http://gosspublic.alicdn.com/ossutil/1.6.19/ossutil64  && chmod 755 ossutil64 && \
-           mv ossutil64 /usr/sbin/ossutil64 && \
-           ossutil64 config -e oss-accelerate.aliyuncs.com -i ${OSS_ID} -k ${OSS_KEY}  -L CH -c oss-config && \
-           wget https://github.com/cuisongliu/sshcmd/releases/download/v1.5.2/sshcmd && chmod a+x sshcmd && \
-           mv sshcmd /usr/sbin/sshcmd"
-remotecmd "cd /root/cloud-kernel/ && sh oss.sh $1 $2"
+remotecmd "cd /root/cloud-kernel/ && sh oss.sh $1 ${MARKET_TOKEN}"
 
+curl "https://oapi.dingtalk.com/robot/send?access_token=${DD_TOKEN}" \
+   -H "Content-Type: application/json" \
+   -d "{\"msgtype\":\"link\",\"link\":{\"text\":\"kubernetes自动发布版本v$1,详细信息请看https://github.com/kubernetes/kubernetes/releases/tag/v$1\",\"title\":\"kubernetes版本发布成功\",\"picUrl\":\"\",\"messageUrl\":\"http://store.lameleg.com\"}}"
 #sshcmd --passwd $2 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"
 
 echo "release instance"
