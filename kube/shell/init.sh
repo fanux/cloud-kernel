@@ -1,8 +1,7 @@
 #!/bin/bash
-# Install docker
-chmod a+x docker.sh
-#./docker.sh  /var/docker/lib  127.0.0.1
-sh docker.sh
+# Install containerd
+chmod a+x containerd.sh
+sh containerd.sh
 # Open ipvs
 modprobe -- ip_vs
 modprobe -- ip_vs_rr
@@ -67,7 +66,7 @@ sysctl -w net.ipv4.ip_forward=1
 disable_firewalld
 swapoff -a || true
 disable_selinux
-docker load -i ../images/images.tar || true
+ctr cri load  ../images/images.tar || true
 
 cp ../bin/* /usr/bin
 # Cgroup driver
@@ -75,8 +74,7 @@ cp ../conf/kubelet.service /etc/systemd/system/
 [ -d /etc/systemd/system/kubelet.service.d ] || mkdir /etc/systemd/system/kubelet.service.d
 cp ../conf/10-kubeadm.conf /etc/systemd/system/kubelet.service.d/
 
-cgroupDriver=$(docker info|grep Cg)
-driver=${cgroupDriver##*: }
+driver=cgroupfs
 echo "driver is ${driver}"
 
 [ -d /var/lib/kubelet ] || mkdir -p /var/lib/kubelet/
@@ -155,5 +153,12 @@ streamingConnectionIdleTimeout: 4h0m0s
 syncFrequency: 1m0s
 volumeStatsAggPeriod: 1m0s
 EOF
+
+# 修改kubelet
+mkdir -p /etc/systemd/system/kubelet.service.d
+cat > /etc/systemd/system/kubelet.service.d/containerd.conf << eof
+[Service]
+Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --runtime-request-timeout=15m --container-runtime-endpoint=unix:///run/containerd/containerd.sock --image-service-endpoint=unix:///run/containerd/containerd.sock"
+eof
 
 systemctl enable kubelet

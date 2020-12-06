@@ -41,20 +41,20 @@ remotecmd 'git clone https://github.com/fanux/cloud-kernel'
 echo "install kubernetes bin"
 remotecmd "cd cloud-kernel && \
            wget https://dl.k8s.io/v$1/kubernetes-server-linux-amd64.tar.gz && \
-           wget https://download.docker.com/linux/static/stable/x86_64/docker-19.03.12.tgz && \
-           cp  docker-19.03.12.tgz kube/docker/docker.tgz && \
+           wget https://github.com/containerd/containerd/releases/download/v1.3.9/cri-containerd-cni-1.3.9-linux-amd64.tar.gz && \
+           cp  cri-containerd-cni-1.3.9-linux-amd64.tar.gz kube/docker/cri-containerd-cni-linux-amd64.tar.gz && \
            tar zxvf kubernetes-server-linux-amd64.tar.gz && \
            cd kube && \
            cp ../kubernetes/server/bin/kubectl bin/ && \
            cp ../kubernetes/server/bin/kubelet bin/ && \
            cp ../kubernetes/server/bin/kubeadm bin/ && \
            sed s/k8s_version/$1/g -i conf/kubeadm.yaml && \
-           cd shell && chmod a+x docker.sh && sh docker.sh && \
-           rm -rf /etc/docker/daemon.json && systemctl restart docker && \
+           cd shell && chmod a+x containerd.sh && sh containerd.sh && \
+           systemctl restart containerd && \
            sh init.sh && sh master.sh && \
-           docker pull fanux/lvscare && \
+           crictl pull fanux/lvscare && \
            cp /usr/sbin/conntrack ../bin/ && \
-           cd ../.. &&  sleep 180 && docker images && \
+           cd ../.. &&  sleep 180 && crictl images && \
            sh save.sh && \
            tar zcvf kube$1.tar.gz kube && mv kube$1.tar.gz /tmp/"
 
