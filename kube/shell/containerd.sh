@@ -5,7 +5,6 @@ command_exists() {
 set -x
 if ! command_exists ctr; then
   tar  -xvzf ../containerd/cri-containerd-cni-linux-amd64.tar.gz -C /
-eof
   systemctl enable  containerd.service
   systemctl restart containerd.service
 fi
