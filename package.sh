@@ -36,7 +36,7 @@ echo "install git"
 remotecmd 'yum install -y git conntrack'
 
 echo "clone cloud kernel"
-remotecmd 'git clone https://github.com/fanux/cloud-kernel'
+remotecmd 'git clone https://github.com/fanux/cloud-kernel && cd cloud-kernel && git checkout containerd'
 
 echo "install kubernetes bin"
 remotecmd "cd cloud-kernel && \
