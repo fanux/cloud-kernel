@@ -36,7 +36,15 @@ echo "install git"
 remotecmd 'yum install -y git conntrack'
 
 echo "clone cloud kernel"
-remotecmd 'git clone https://github.com/fanux/cloud-kernel'
+## version >= 1.20 Use containerd
+version_ge(){
+    test "$(echo "$@" | tr ' ' '\n' | sort -rV | head -n 1)" == "$1"
+}
+if version_ge "$1" 1.20; then
+	remotecmd "git clone https://github.com/fanux/cloud-kernel && cd cloud-kernel && git checkout containerd"
+else 
+	remotecmd 'git clone https://github.com/fanux/cloud-kernel'
+fi
 
 echo "install kubernetes bin"
 remotecmd "cd cloud-kernel && \
