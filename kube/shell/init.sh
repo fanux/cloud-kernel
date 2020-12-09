@@ -71,7 +71,7 @@ sysctl -w net.ipv4.ip_forward=1
 disable_firewalld
 swapoff -a || true
 disable_selinux
-ctr cri load  ../images/images.tar || true
+ctr -n=k8s.io image import ../images/images.tar || true
 
 cp ../bin/* /usr/bin
 # Cgroup driver
