@@ -52,7 +52,7 @@ remotecmd "cd cloud-kernel && \
            cd shell && chmod a+x containerd.sh && sh containerd.sh && \
            systemctl restart containerd && \
            sh init.sh && sh master.sh && \
-           crictl pull fanux/lvscare && \
+           ctr -n=k8s.io image pull fanux/lvscare && \
            cp /usr/sbin/conntrack ../bin/ && \
            cd ../.. &&  sleep 180 && crictl images && \
            sh save.sh && \
