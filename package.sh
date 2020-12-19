@@ -1,7 +1,18 @@
 #!/bin/bash
 # package.sh [k8s version] password
 # package.sh 1.16.0 storepass
+function check() {
+  if [[ $? != 0 ]]; then
+    dingding $1  
+  fi
+}
 
+localVersion=$1
+function dingding() {
+    curl "https://oapi.dingtalk.com/robot/send?access_token=${DD_TOKEN}" \
+   -H "Content-Type: application/json" \
+   -d "{\"msgtype\":\"link\",\"link\":{\"text\":\"kubernetes自动发布版本v$localVersion失败, 失败原因:$1, \",\"title\":\"kubernetes版本发布失败\",\"picUrl\":\"\",\"messageUrl\":\"http://store.lameleg.com\"}}"
+}
 echo "create hongkong vm"
 aliyun ecs RunInstances --Amount 1 \
     --ImageId centos_7_04_64_20G_alibase_201701015.vhd \
@@ -17,6 +28,7 @@ aliyun ecs RunInstances --Amount 1 \
     --SecurityGroupId sg-j6cb45dolegxcb32b47w \
     --VSwitchId vsw-j6cvaap9o5a7et8uumqyx \
     --ZoneId cn-hongkong-c > InstanceId.json
+check "aliyun ecs RunInstances "
 cat InstanceId.json
 ID=$(jq -r ".InstanceIdSets.InstanceIdSet[0]" < InstanceId.json)
 
