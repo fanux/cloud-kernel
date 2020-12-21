@@ -18,6 +18,18 @@ aliyun ecs RunInstances --Amount 1 \
     --VSwitchId vsw-j6cvaap9o5a7et8uumqyx \
     --ZoneId cn-hongkong-c > InstanceId.json
 cat InstanceId.json
+
+ERROR=$(cat InstanceId.json | grep ERROR | cut -d ":" -f 2 | sed 's/^[ ]*//g')
+if [[ $ERROR = "SDK.ServerError" ]]; then
+    ErrorCode=$(cat InstanceId.json | grep ErrorCode | cut -d ":" -f 2 | sed 's/^[ ]*//g')
+    Message=$(cat InstanceId.json | grep Message | cut -d ":" -f 2 | sed 's/^[ ]*//g')
+    Recommend=http:$(cat InstanceId.json | grep Recommend | cut -d ":" -f 3 | sed 's/^[ ]*//g')
+    curl "https://oapi.dingtalk.com/robot/send?access_token=${DD_TOKEN}" \
+       -H "Content-Type: application/json" \
+       -d "{\"msgtype\":\"link\",\"link\":{\"text\":\"打包版本v$1失败,错误码: $ErrorCode,详细信息: $Message\",\"title\":\"kubernetes版本v$1打包失败\",\"picUrl\":\"\",\"messageUrl\":\"$Recommend\"}}"
+    exit
+fi
+
 ID=$(jq -r ".InstanceIdSets.InstanceIdSet[0]" < InstanceId.json)
 
 echo "sleep 40s wait for IP and FIP"
