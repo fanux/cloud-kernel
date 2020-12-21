@@ -54,6 +54,7 @@ remotecmd "cd cloud-kernel && \
            sh init.sh && sh master.sh && \
            ctr -n=k8s.io images pull docker.io/fanux/lvscare:latest && \
            cp /usr/sbin/conntrack ../bin/ && \
+           cp /usr/lib64/libseccomp* ../lib64/ && \
            cd ../.. &&  sleep 180 && crictl images && \
            sh save.sh && \
            tar zcvf kube$1.tar.gz kube && mv kube$1.tar.gz /tmp/"
