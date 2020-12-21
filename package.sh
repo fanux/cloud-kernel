@@ -65,9 +65,9 @@ sh test.sh ${DRONE_TAG} $FIP
 echo "release package, need remote server passwd, WARN will pending"
 remotecmd "cd /root/cloud-kernel/ && sh oss.sh $1 ${MARKET_TOKEN}"
 
-curl "https://oapi.dingtalk.com/robot/send?access_token=${DD_TOKEN}" \
-   -H "Content-Type: application/json" \
-   -d "{\"msgtype\":\"link\",\"link\":{\"text\":\"kubernetes自动发布版本v$1,详细信息请看https://github.com/kubernetes/kubernetes/releases/tag/v$1\",\"title\":\"kubernetes版本发布成功\",\"picUrl\":\"\",\"messageUrl\":\"http://store.lameleg.com\"}}"
+#curl "https://oapi.dingtalk.com/robot/send?access_token=${DD_TOKEN}" \
+#   -H "Content-Type: application/json" \
+#   -d "{\"msgtype\":\"link\",\"link\":{\"text\":\"kubernetes自动发布版本v$1,详细信息请看https://github.com/kubernetes/kubernetes/releases/tag/v$1\",\"title\":\"kubernetes版本发布成功\",\"picUrl\":\"\",\"messageUrl\":\"http://store.lameleg.com\"}}"
 #sshcmd --passwd $2 --host store.lameleg.com --cmd "sh release-k8s.sh $1 $FIP"
 
 echo "release instance"
