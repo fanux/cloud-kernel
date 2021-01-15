@@ -21,7 +21,7 @@ if ! command_exists docker; then
 	lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"
 	echo "current system is $lsb_dist"
 	case "$lsb_dist" in
-		ubuntu|deepin|debian|raspbian)
+		ubuntu|deepin|debian|raspbian|kylin)
 			cp ../conf/docker.service /lib/systemd/system/docker.service
 		;;
 		centos|rhel|ol|sles)
