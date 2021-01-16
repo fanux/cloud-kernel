@@ -80,7 +80,11 @@ cp ../conf/kubelet.service /etc/systemd/system/
 [ -d /etc/systemd/system/kubelet.service.d ] || mkdir /etc/systemd/system/kubelet.service.d
 cp ../conf/10-kubeadm.conf /etc/systemd/system/kubelet.service.d/
 
-driver=cgroupfs
+if grep "SystemdCgroup = true"  /etc/containerd/config.toml &> /dev/nul; then  
+  driver=systemd
+else
+  driver=cgroupfs
+fi
 echo "driver is ${driver}"
 
 [ -d /var/lib/kubelet ] || mkdir -p /var/lib/kubelet/
@@ -164,7 +168,7 @@ EOF
 mkdir -p /etc/systemd/system/kubelet.service.d
 cat > /etc/systemd/system/kubelet.service.d/containerd.conf << eof
 [Service]
-Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --runtime-request-timeout=15m --container-runtime-endpoint=unix:///run/containerd/containerd.sock --image-service-endpoint=unix:///run/containerd/containerd.sock"
+Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --cgroup-driver=${driver} --runtime-request-timeout=15m --container-runtime-endpoint=unix:///run/containerd/containerd.sock --image-service-endpoint=unix:///run/containerd/containerd.sock"
 eof
 
 systemctl enable kubelet
