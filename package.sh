@@ -20,7 +20,7 @@ aliyun ecs RunInstances --Amount 1 \
 cat InstanceId.json
 
 ERROR=$(cat InstanceId.json | grep ERROR | cut -d ":" -f 2 | sed 's/^[ ]*//g')
-if [ $ERROR = "SDK.ServerError" ]; then
+if [ x$ERROR = "xSDK.ServerError" ]; then
     ErrorCode=$(cat InstanceId.json | grep ErrorCode | cut -d ":" -f 2 | sed 's/^[ ]*//g')
     Message=$(cat InstanceId.json | grep Message | cut -d ":" -f 2 | sed 's/^[ ]*//g')
     Recommend=http:$(cat InstanceId.json | grep Recommend | cut -d ":" -f 3 | sed 's/^[ ]*//g')
