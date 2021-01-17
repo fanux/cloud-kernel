@@ -39,7 +39,7 @@ disable_firewalld() {
   lsb_dist=$( get_distribution )
 	lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"
 	case "$lsb_dist" in
-		ubuntu|deepin|debian)
+		ubuntu|deepin|debian|kylin)
 			command -v ufw &> /dev/null && ufw disable
 		;;
 		centos|rhel)
@@ -62,9 +62,9 @@ cat <<EOF >  /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 net.ipv4.conf.all.rp_filter=1
-net.ipv4.ip_forward=1
 EOF
 sysctl --system
+sysctl -w net.ipv4.ip_forward=1
 disable_firewalld
 swapoff -a || true
 disable_selinux
