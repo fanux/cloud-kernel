@@ -53,8 +53,8 @@ remotecmd 'git clone https://github.com/fanux/cloud-kernel && cd cloud-kernel &&
 echo "install kubernetes bin"
 remotecmd "cd cloud-kernel && \
            wget https://dl.k8s.io/v$1/kubernetes-server-linux-amd64.tar.gz && \
-           wget https://sealyun.oss-cn-beijing.aliyuncs.com/tools/cri-containerd-cni-1.3.9-linux-amd64.tar.gz && \
-           wget https://sealyun.oss-cn-beijing.aliyuncs.com/tools/crictl-v1.20.0-linux-amd64.tar.gz && \
+           wget https://sealyun.oss-accelerate.aliyuncs.com/tools/cri-containerd-cni-1.3.9-linux-amd64.tar.gz && \
+           wget https://sealyun.oss-accelerate.aliyuncs.com/tools/crictl-v1.20.0-linux-amd64.tar.gz && \
            cp  cri-containerd-cni-1.3.9-linux-amd64.tar.gz kube/containerd/cri-containerd-cni-linux-amd64.tar.gz && \
            tar zxvf kubernetes-server-linux-amd64.tar.gz && \
            tar xf crictl-v1.20.0-linux-amd64.tar.gz && \

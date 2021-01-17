@@ -46,8 +46,7 @@ sleep 100 # wait for sshd
 alias remotecmd="sshcmd --pk ./release.pem --host $2 --cmd"
 
 echo "sshcmd sealos command"
-
-SEALOS_URL="https://sealyun.oss-cn-beijing.aliyuncs.com/latest/sealos"
+SEALOS_URL="https://sealyun.oss-accelerate.aliyuncs.com/latest/sealos"
 
 remotecmd "wget -c $SEALOS_URL && chmod +x sealos && mv sealos /usr/bin "
 
