@@ -46,9 +46,7 @@ sleep 100 # wait for sshd
 alias remotecmd="sshcmd --pk ./release.pem --host $2 --cmd"
 
 echo "sshcmd sealos command"
-SEALOS_URL=$(curl -LsSf https://api.github.com/repos/fanux/sealos/releases/latest | jq ".assets[0].browser_download_url")
-# remove "
-SEALOS_URL=$(echo $SEALOS_URL | sed 's/.\(.*\)/\1/' | sed 's/\(.*\)./\1/')
+SEALOS_URL="https://sealyun.oss-cn-beijing.aliyuncs.com/latest/sealos"
 
 remotecmd "wget -c $SEALOS_URL && chmod +x sealos && mv sealos /usr/bin "
 
