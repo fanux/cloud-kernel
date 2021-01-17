@@ -43,7 +43,7 @@ disable_firewalld() {
   lsb_dist=$( get_distribution )
 	lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"
 	case "$lsb_dist" in
-		ubuntu|deepin|debian)
+		ubuntu|deepin|debian|kylin)
 			command -v ufw &> /dev/null && ufw disable
 		;;
 		centos|rhel)
@@ -66,9 +66,9 @@ cat <<EOF >  /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 net.ipv4.conf.all.rp_filter=1
-net.ipv4.ip_forward=1
 EOF
 sysctl --system
+sysctl -w net.ipv4.ip_forward=1
 disable_firewalld
 swapoff -a || true
 disable_selinux
@@ -80,7 +80,11 @@ cp ../conf/kubelet.service /etc/systemd/system/
 [ -d /etc/systemd/system/kubelet.service.d ] || mkdir /etc/systemd/system/kubelet.service.d
 cp ../conf/10-kubeadm.conf /etc/systemd/system/kubelet.service.d/
 
-driver=cgroupfs
+if grep "SystemdCgroup = true"  /etc/containerd/config.toml &> /dev/nul; then  
+  driver=systemd
+else
+  driver=cgroupfs
+fi
 echo "driver is ${driver}"
 
 [ -d /var/lib/kubelet ] || mkdir -p /var/lib/kubelet/
@@ -164,7 +168,7 @@ EOF
 mkdir -p /etc/systemd/system/kubelet.service.d
 cat > /etc/systemd/system/kubelet.service.d/containerd.conf << eof
 [Service]
-Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --runtime-request-timeout=15m --container-runtime-endpoint=unix:///run/containerd/containerd.sock --image-service-endpoint=unix:///run/containerd/containerd.sock"
+Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --cgroup-driver=${driver} --runtime-request-timeout=15m --container-runtime-endpoint=unix:///run/containerd/containerd.sock --image-service-endpoint=unix:///run/containerd/containerd.sock"
 eof
 
 systemctl enable kubelet
