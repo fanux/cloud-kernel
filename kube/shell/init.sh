@@ -61,10 +61,10 @@ fi
 cat <<EOF >  /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
-net.ipv4.conf.all.rp_filter=1
 EOF
 sysctl --system
 sysctl -w net.ipv4.ip_forward=1
+sysctl -w net.ipv4.conf.all.rp_filter=0
 disable_firewalld
 swapoff -a || true
 disable_selinux
