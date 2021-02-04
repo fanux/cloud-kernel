@@ -76,8 +76,7 @@ cp ../conf/kubelet.service /etc/systemd/system/
 [ -d /etc/systemd/system/kubelet.service.d ] || mkdir /etc/systemd/system/kubelet.service.d
 cp ../conf/10-kubeadm.conf /etc/systemd/system/kubelet.service.d/
 
-cgroupDriver=$(docker info|grep "Cgroup Driver")
-driver=${cgroupDriver##*: }
+driver=$(docker info -f "{{.CgroupDriver}}")
 echo "driver is ${driver}"
 
 [ -d /var/lib/kubelet ] || mkdir -p /var/lib/kubelet/
